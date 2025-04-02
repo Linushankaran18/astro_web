@@ -40,7 +40,7 @@ const Navbar = () => {
                 {isVisaDropdownOpen && (
                   <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                     <div className="py-1" role="menu" aria-orientation="vertical">
-                      <a href="#student-visa" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Student Visa</a>
+                      <a href="/study-in-uk" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Student Visa</a>
                       <a href="#visitor-visa" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Visitor Visa</a>
                       <a href="#air-ticketing" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Air Ticketing</a>
                       <a href="#tourism" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Tourism</a>
@@ -84,7 +84,7 @@ const Navbar = () => {
             
             {isVisaDropdownOpen && (
               <div className="pl-4 space-y-1">
-                <a href="#student-visa" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600">Student Visa</a>
+                <a href="/study-in-uk" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600">Student Visa</a>
                 <a href="#visitor-visa" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600">Visitor Visa</a>
                 <a href="#air-ticketing" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600">Air Ticketing</a>
                 <a href="#tourism" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600">Tourism</a>
