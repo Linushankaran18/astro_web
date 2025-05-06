@@ -1,40 +1,51 @@
-import React from 'react'
 import { Book, Award, Clock, Check, Globe } from 'lucide-react'
 import { Link } from 'react-router-dom'
+// Removed unused Navbar import
 
 const StudyInUK = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-indigo-800 opacity-90 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-indigo-800 opacity-80 z-0"></div>
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: "url('/images/flags/uk-universities.jpg')",
-            backgroundBlendMode: "overlay",
-            mixBlendMode: "overlay"
+            backgroundImage: "url('/images/flags/uk.jpeg')",
+            backgroundBlendMode: "multiply",
+            filter: "contrast(1.1) brightness(0.9)"
           }}
         ></div>
-        <div className="container mx-auto px-4 py-24 relative z-10">
+        <div className="container mx-auto px-4 py-32 relative z-10">
           <div className="max-w-3xl">
-            <img src="/images/flags/uk.jpeg" alt="UK Flag" className="w-20 h-12 object-cover mb-6 shadow-lg" />
-            <h1 className="text-5xl font-bold text-white mb-6">Study in the United Kingdom</h1>
-            <p className="text-xl text-blue-100 mb-8">
+            <div className="relative">
+              <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200 leading-tight mb-6 drop-shadow-lg">
+                Study in the<br />
+                <span className="text-6xl text-white">United Kingdom</span>
+              </h1>
+              <div className="absolute -left-3 top-0 w-1 h-20"></div>
+            </div>
+            <p className="text-xl text-blue-100 mb-10 max-w-2xl leading-relaxed pl-1 backdrop-blur-sm bg-blue-900/10 p-4 rounded-lg border-l-4 shadow-xl">
               Access world-renowned education and incredible cultural experiences in one of the most popular study destinations globally.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link 
                 to="/contact" 
-                className="px-6 py-3 bg-white text-blue-900 font-medium rounded-lg shadow-lg hover:bg-blue-50 transition duration-300"
+                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:from-blue-600 hover:to-indigo-700 transition duration-300 transform hover:-translate-y-1 flex items-center"
               >
-                Apply for UK Student Visa
+                <span className="mr-2">Apply for UK Student Visa</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
               </Link>
               <a 
                 href="#uk-universities" 
-                className="px-6 py-3 bg-transparent border-2 border-white text-white font-medium rounded-lg hover:bg-white/10 transition duration-300"
+                className="px-8 py-4 bg-white/20 backdrop-blur-sm border-2 border-white text-white font-medium rounded-lg hover:bg-white/30 transition duration-300 transform hover:-translate-y-1 flex items-center"
               >
-                Explore Universities
+                <span className="mr-2">Explore Universities</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
               </a>
             </div>
           </div>
@@ -95,37 +106,37 @@ const StudyInUK = () => {
             {[
               {
                 name: "Coventry University",
-                image: "/images/universities/coventry.jpg",
+                image: "/images/universities/coventry.png",
                 description: "A forward-looking, modern university with a proud tradition as a provider of high-quality education and a focus on applied research.",
                 fields: ["Business", "Engineering", "Health Sciences"]
               },
               {
                 name: "University of Chester",
-                image: "/images/universities/chester.jpg",
+                image: "/images/universities/chester.png",
                 description: "Founded in 1839, one of the oldest higher education institutions in the UK with a focus on practical learning and employability.",
                 fields: ["Education", "Health & Social Care", "Business & Management"]
               },
               {
                 name: "University of Bristol",
-                image: "/images/universities/bristol.jpg",
+                image: "/images/universities/bristol.png",
                 description: "A research-intensive university with a reputation for high-quality teaching and innovation across many disciplines.",
                 fields: ["Engineering", "Social Sciences", "Life Sciences"]
               },
               {
                 name: "University of Greenwich",
-                image: "/images/universities/greenwich.jpg",
+                image: "/images/universities/greenwich.png",
                 description: "Set in beautiful historic buildings near London, offering career-focused courses and strong industry connections.",
                 fields: ["Architecture", "Business", "Computing & Mathematics"]
               },
               {
                 name: "University of Hertfordshire",
-                image: "/images/universities/hertfordshire.jpg",
+                image: "/images/universities/hertfordshire.png",
                 description: "An innovative and enterprising university with strong links to business and industry.",
                 fields: ["Creative Arts", "Computer Science", "Business & Finance"]
               },
               {
                 name: "University of Law",
-                image: "/images/universities/law.jpg",
+                image: "/images/universities/law.png",
                 description: "The UK's longest-established specialist provider of legal education and training with a focus on employability.",
                 fields: ["Law", "Business", "Criminology"]
               }
