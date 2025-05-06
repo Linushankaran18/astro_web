@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,33 +23,10 @@ const Navbar = () => {
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              <a href="#home" className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-l font-medium">Home</a>
-              
-              <div 
-                className="relative"
-                onMouseEnter={() => setIsVisaDropdownOpen(true)}
-                onMouseLeave={() => setIsVisaDropdownOpen(false)}
-              >
-                <button 
-                  className="text-gray-800 hover:text-blue-600 px-3 py-2 rounded-md text-l font-medium flex items-center"
-                  onClick={() => setIsVisaDropdownOpen(!isVisaDropdownOpen)}
-                >
-                  Services
-                  <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-                
-                {isVisaDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1" role="menu" aria-orientation="vertical">
-                      <a href="/study-in-uk" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Student Visa</a>
-                      <a href="#visitor-visa" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Visitor Visa</a>
-                      <a href="#air-ticketing" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Air Ticketing</a>
-                      <a href="#tourism" className="block px-4 py-2 text-l text-gray-700 hover:bg-gray-100" role="menuitem">Tourism</a>
-                    </div>
-                  </div>
-                )}
-              </div>
-              
+              <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+              <Link to="/about" className="text-gray-700 hover:text-blue-600">About</Link>
+              <Link to="/services" className="text-gray-700 hover:text-blue-600">Services</Link>
+              <Link to="/tourism" className="text-gray-700 hover:text-blue-600">Tourism</Link>
               <a href="#blog" className="text-gray-800 hover:text-blue-600 px-3 py-2 rounded-md text-l font-medium">Blog</a>
               <a href="#testimonials" className="text-gray-800 hover:text-blue-600 px-3 py-2 rounded-md text-l font-medium">Testimonials</a>
               <a href="#contact" className="text-gray-800 hover:text-blue-600 px-3 py-2 rounded-md text-l font-medium">Contact Us</a>
