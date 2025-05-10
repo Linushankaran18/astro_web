@@ -1,7 +1,41 @@
-import React, { useEffect } from 'react'
-import { GraduationCap, Globe, Award } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { GraduationCap, Globe, Award, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const Hero = () => {
+  // State for managing the current slide
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Ad slides data
+  const adSlides = [
+    {
+      id: 1,
+      image: "/images/ads/ad1.jpeg", // Replace with actual ad image paths
+      title: "What Next? After A/Level",
+      description: "Get your student visa with us"
+    },
+    {
+      id: 2,
+      image: "/images/ads/ad2.jpg",
+      title: "Master Program",
+      description: "Get your student visa with us"
+    },
+    {
+      id: 3,
+      image: "/images/ads/ad3.jpg",
+      title: "Study In UK",
+      description: "Get your student visa with us"
+    }
+  ];
+
+  // Handle slide rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % adSlides.length);
+    }, 5000); // Change slide every 5 seconds
+    
+    return () => clearInterval(interval);
+  }, [adSlides.length]);
+
   // Optional: Add subtle parallax effect on mouse movement
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -18,6 +52,16 @@ const Hero = () => {
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
   }, []);
+  
+  // Navigate to next slide
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % adSlides.length);
+  };
+
+  // Navigate to previous slide
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + adSlides.length) % adSlides.length);
+  };
   
   return (
     <div id="home" className="relative bg-gradient-to-r from-blue-900 to-indigo-800 pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
@@ -75,19 +119,83 @@ const Hero = () => {
                 Expert guidance on university applications, scholarships, visas, and everything you need for your international academic journey.
               </p>
               
-              {/* Rest of the content */}
-              {/* ... */}
+              {/* Call to action buttons */}
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a href="#services" className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md shadow-lg transition duration-300 transform hover:-translate-y-1">
+                  Explore Services
+                </a>
+                <a href="#contact" className="px-6 py-3 bg-transparent hover:bg-white/10 text-white border border-white/30 font-medium rounded-md shadow-lg transition duration-300 transform hover:-translate-y-1">
+                  Contact Us
+                </a>
+              </div>
             </div>
             
-            {/* Enhanced form background */}
+            {/* Ad Slideshow on the right side */}
             <div className="md:w-1/2 flex justify-center">
               <div className="bg-gradient-to-br from-white/10 to-blue-500/10 backdrop-blur-md p-6 rounded-lg border border-white/20 shadow-2xl w-full max-w-md transform hover:-translate-y-1 transition duration-300 relative overflow-hidden">
                 {/* Animated glow effect */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg opacity-20 blur-xl animate-glow"></div>
                 
-                <div className="relative">
-                  {/* Form content remains the same */}
-                  {/* ... */}
+                {/* Slideshow container */}
+                <div className="relative h-[320px]">
+                  {/* Slides */}
+                  {adSlides.map((slide, index) => (
+                    <div 
+                      key={slide.id}
+                      className={`absolute inset-0 transition-opacity duration-500 ${
+                        index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                      }`}
+                    >
+                      <div className="h-[200px] w-[300px] mx-auto overflow-hidden rounded-md mb-3">
+                        <img 
+                          src={slide.image} 
+                          alt={slide.title} 
+                          className="w-full h-full object-cover object-center"
+                          onError={(e) => {
+                            // Fallback for missing images
+                            const target = e.target as HTMLImageElement;
+                            target.src = "https://via.placeholder.com/300x200?text=Advertisement";
+                          }}
+                        />
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2">{slide.title}</h3>
+                      <p className="text-blue-100 text-sm line-clamp-2">{slide.description}</p>
+                      
+                      <button className="mt-3 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition text-sm">
+                        Learn More
+                      </button>
+                    </div>
+                  ))}
+                  
+                  {/* Navigation buttons */}
+                  <button 
+                    onClick={prevSlide}
+                    className="absolute left-4 top-[100px] transform -translate-y-1/2 z-20 bg-black/30 text-white p-1.5 rounded-full hover:bg-black/50 transition"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                  <button 
+                    onClick={nextSlide}
+                    className="absolute right-4 top-[100px] transform -translate-y-1/2 z-20 bg-black/30 text-white p-1.5 rounded-full hover:bg-black/50 transition"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                  
+                  {/* Slide indicators */}
+                  <div className="absolute bottom-[110px] left-0 right-0 flex justify-center z-20 space-x-2">
+                    {adSlides.map((_, index) => (
+                      <button 
+                        key={index}
+                        onClick={() => setCurrentSlide(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentSlide ? 'bg-white w-4' : 'bg-white/50'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

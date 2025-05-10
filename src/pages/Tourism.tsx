@@ -144,7 +144,7 @@ const Tourism = () => {
   ];
 
   return (
-    <div className="py-16 bg-gray-50">
+    <div className="py-16 pt-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight mb-4">

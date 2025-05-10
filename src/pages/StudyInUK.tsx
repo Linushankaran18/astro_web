@@ -1,8 +1,69 @@
-import { Book, Award, Clock, Check, Globe } from 'lucide-react'
+import { Book, Award, Clock, Check, Globe, Calculator, PoundSterling, RefreshCw } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 // Removed unused Navbar import
 
 const StudyInUK = () => {
+  // State for the show money calculator
+  const [courseLength, setCourseLength] = useState(9);
+  const [studyLocation, setStudyLocation] = useState('london');
+  const [includeDependents, setIncludeDependents] = useState(false);
+  const [dependents, setDependents] = useState(0);
+  const [courseFeePerYear, setCourseFeePerYear] = useState(15000);
+  const [initialPayment, setInitialPayment] = useState(5000);
+  const [showInLKR, setShowInLKR] = useState(false);
+  const [exchangeRate, setExchangeRate] = useState(400); // Default GBP to LKR rate
+  
+  // Calculate required funds
+  const calculateRequiredFunds = () => {
+    // Monthly living costs 
+    const londonLivingCost = 1334; // £1,334 per month for London
+    const outsideLondonLivingCost = 1023; // £1,023 per month for outside London
+    
+    // Maximum time to consider (9 months cap)
+    const monthsToConsider = Math.min(courseLength, 9);
+    
+    // Calculate living costs based on location
+    const monthlyCost = studyLocation === 'london' ? londonLivingCost : outsideLondonLivingCost;
+    const livingCosts = monthlyCost * monthsToConsider;
+    
+    // Calculate remaining tuition fee
+    const remainingTuition = Math.max(0, courseFeePerYear - initialPayment);
+    
+    // Dependent costs
+    let dependentCosts = 0;
+    if (includeDependents && dependents > 0) {
+      const dependentMonthlyCost = studyLocation === 'london' ? 845 : 680;
+      dependentCosts = dependents * dependentMonthlyCost * monthsToConsider;
+    }
+    
+    const total = livingCosts + remainingTuition + dependentCosts;
+    
+    return {
+      livingCosts,
+      remainingTuition,
+      dependentCosts,
+      total
+    };
+  };
+  
+  const funds = calculateRequiredFunds();
+  
+  // Convert GBP to LKR
+  const convertToLKR = (amountGBP: number): number => {
+    return Math.round(amountGBP * exchangeRate);
+  };
+  
+  // Format currency
+
+  const formatCurrency = (amount: number, useLKR: boolean = false): string => {
+    if (useLKR) {
+      const amountLKR: number = convertToLKR(amount);
+      return `${amountLKR.toLocaleString()} LKR`;
+    }
+    return `£${amount.toLocaleString()}`;
+  };
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -86,6 +147,248 @@ const StudyInUK = () => {
               <p className="text-gray-700">
                 Experience diverse cultures, historic landmarks, and vibrant cities all within a compact geography
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Show Money Calculator Section */}
+      <section className="py-16 bg-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">UK Visa Financial Requirements Calculator</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto my-4"></div>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Calculate how much 'show money' you need for your UK student visa application
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="md:flex">
+              <div className="md:w-1/2 p-6 md:p-8 space-y-6 border-r border-gray-200">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Course Length (months)</label>
+                  <div className="flex items-center">
+                    <input
+                      type="range"
+                      min="1"
+                      max="24"
+                      value={courseLength}
+                      onChange={(e) => setCourseLength(parseInt(e.target.value))}
+                      className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <span className="ml-3 text-lg font-semibold text-blue-800 min-w-[40px]">{courseLength}</span>
+                  </div>
+                  <p className="mt-1 text-xs text-gray-500">
+                    Note: Maximum living costs calculated for 9 months (even if your course is longer)
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Study Location</label>
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <input
+                        id="london"
+                        name="location"
+                        type="radio"
+                        checked={studyLocation === 'london'}
+                        onChange={() => setStudyLocation('london')}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                      />
+                      <label htmlFor="london" className="ml-2 block text-sm text-gray-700">London</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        id="outside-london"
+                        name="location"
+                        type="radio"
+                        checked={studyLocation === 'outside'}
+                        onChange={() => setStudyLocation('outside')}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                      />
+                      <label htmlFor="outside-london" className="ml-2 block text-sm text-gray-700">Outside London</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Course Fee Per Year (£)
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="500"
+                      value={courseFeePerYear}
+                      onChange={(e) => setCourseFeePerYear(Math.max(0, parseInt(e.target.value) || 0))}
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Initial Payment Already Made (£)
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      max={courseFeePerYear}
+                      step="500"
+                      value={initialPayment}
+                      onChange={(e) => setInitialPayment(Math.min(courseFeePerYear, Math.max(0, parseInt(e.target.value) || 0)))}
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                    />
+                    <p className="mt-1 text-xs text-gray-500">
+                      This is the amount you've already paid to the university
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center mb-3">
+                    <input
+                      id="dependents"
+                      type="checkbox"
+                      checked={includeDependents}
+                      onChange={() => setIncludeDependents(!includeDependents)}
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+                    />
+                    <label htmlFor="dependents" className="ml-2 block text-sm font-medium text-gray-700">
+                      Include Dependents
+                    </label>
+                  </div>
+                  
+                  {includeDependents && (
+                    <div className="ml-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Number of Dependents
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="10"
+                        value={dependents}
+                        onChange={(e) => setDependents(parseInt(e.target.value) || 0)}
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <input
+                        id="show-lkr"
+                        type="checkbox"
+                        checked={showInLKR}
+                        onChange={() => setShowInLKR(!showInLKR)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
+                      />
+                      <label htmlFor="show-lkr" className="ml-2 block text-sm font-medium text-gray-700">
+                        Show in Sri Lankan Rupees (LKR)
+                      </label>
+                    </div>
+                    
+                    <button 
+                      onClick={() => setShowInLKR(!showInLKR)}
+                      className="text-blue-600 hover:text-blue-800"
+                      title="Toggle Currency"
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                    </button>
+                  </div>
+                  
+                  {showInLKR && (
+                    <div className="mt-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Exchange Rate (1 GBP to LKR)
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        value={exchangeRate}
+                        onChange={(e) => setExchangeRate(Math.max(1, parseFloat(e.target.value) || 400))}
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="md:w-1/2 p-6 md:p-8 bg-gradient-to-br from-blue-50 to-indigo-50">
+                <div className="flex items-center mb-6">
+                  <Calculator className="w-8 h-8 text-blue-700 mr-3" />
+                  <h3 className="text-xl font-bold text-gray-900">Required Funds</h3>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700">Living Costs:</span>
+                      <span className="text-lg font-semibold text-gray-800 flex items-center">
+                        {!showInLKR && <PoundSterling className="w-4 h-4 mr-1 text-blue-600" />}
+                        {formatCurrency(funds.livingCosts, showInLKR)}
+                      </span>
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Based on {Math.min(courseLength, 9)} months at 
+                      £{studyLocation === 'london' ? '1,334' : '1,023'}/month
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-white rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700">Remaining Tuition:</span>
+                      <span className="text-lg font-semibold text-gray-800 flex items-center">
+                        {!showInLKR && <PoundSterling className="w-4 h-4 mr-1 text-blue-600" />}
+                        {formatCurrency(funds.remainingTuition, showInLKR)}
+                      </span>
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Total fee £{courseFeePerYear.toLocaleString()} minus initial payment £{initialPayment.toLocaleString()}
+                    </div>
+                  </div>
+
+                  {includeDependents && dependents > 0 && (
+                    <div className="p-4 bg-white rounded-lg shadow-sm">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-700">Dependent Costs:</span>
+                        <span className="text-lg font-semibold text-gray-800 flex items-center">
+                          {!showInLKR && <PoundSterling className="w-4 h-4 mr-1 text-blue-600" />}
+                          {formatCurrency(funds.dependentCosts, showInLKR)}
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {dependents} dependent{dependents > 1 ? 's' : ''} at 
+                        £{studyLocation === 'london' ? '845' : '680'}/month for {Math.min(courseLength, 9)} months
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="p-4 bg-blue-600 rounded-lg shadow-sm">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white font-medium">Total Required:</span>
+                      <span className="text-xl font-bold text-white flex items-center">
+                        {!showInLKR && <PoundSterling className="w-5 h-5 mr-1" />}
+                        {formatCurrency(funds.total, showInLKR)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="text-sm text-gray-600 mt-4">
+                    <p className="italic">
+                      This amount needs to be held in your bank account for at least 28 consecutive days before applying.
+                    </p>
+                    <p className="mt-2">
+                      <strong>Note:</strong> This is an estimate based on current UKVI requirements. 
+                      Always check the official <a href="https://www.gov.uk/student-visa" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">UK government website</a> for the most up-to-date information.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
