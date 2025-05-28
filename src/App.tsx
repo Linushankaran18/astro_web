@@ -7,6 +7,7 @@ import Tourism from './pages/Tourism';
 import StudyInUK from './pages/StudyInUK'
 import Contact from './components/Contact'
 import BlogPost from './pages/BlogPost';
+import BlogsPage from './pages/BlogsPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/tourism" element={<Tourism />} />
             <Route path="/study-in-uk" element={<StudyInUK />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             {/* Add other routes as needed */}
           </Routes>
