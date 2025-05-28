@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Tourism from './pages/Tourism';
 import StudyInUK from './pages/StudyInUK'
 import Contact from './components/Contact'
+import ChatBot from './components/ChatBot';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           </Routes>
         </main>
       <Footer />
+      <ChatBot />
     </Router>
     </div>
   )

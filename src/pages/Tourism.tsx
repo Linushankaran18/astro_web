@@ -1,5 +1,6 @@
-import React from 'react';
-import { Globe, Plane, Sun, Tag, Users, Calendar, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { Globe, Plane, Sun, Tag, Users, Calendar, Clock, Map, Search, Check, Utensils, Camera, Umbrella, Shield, Mountain } from 'lucide-react';
+
 
 interface TourPackageProps {
   title: string;
@@ -143,6 +144,80 @@ const Tourism = () => {
     }
   ];
 
+  // State for Travel Planner
+  const [selectedDestination, setSelectedDestination] = useState('');
+  const [customDays, setCustomDays] = useState(7);
+  const [adultsCount, setAdultsCount] = useState(2);
+  const [childrenCount, setChildrenCount] = useState(0);
+  const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
+  const [accommodation, setAccommodation] = useState('hotel');
+  const [showPlanSummary, setShowPlanSummary] = useState(false);
+
+  // Available destinations
+  const availableDestinations = [
+    { id: 'singapore', name: 'Singapore', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', basePricePerDay: 150 },
+    { id: 'malaysia', name: 'Malaysia', image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', basePricePerDay: 120 },
+    { id: 'india', name: 'India', image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', basePricePerDay: 100 },
+    { id: 'thailand', name: 'Thailand', image: 'https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', basePricePerDay: 110 },
+    { id: 'dubai', name: 'Dubai', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', basePricePerDay: 200 },
+    { id: 'japan', name: 'Japan', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', basePricePerDay: 180 },
+  ];
+
+  // Available activities
+  const activities = [
+    { id: 'sightseeing', name: 'Sightseeing', icon: <Camera className="h-4 w-4 mr-2" />, price: 30 },
+    { id: 'food-tour', name: 'Food Tour', icon: <Utensils className="h-4 w-4 mr-2" />, price: 50 },
+    { id: 'adventure', name: 'Adventure Activities', icon: <Mountain className="h-4 w-4 mr-2" />, price: 70 },
+    { id: 'beach', name: 'Beach Activities', icon: <Umbrella className="h-4 w-4 mr-2" />, price: 25 },
+    { id: 'cultural', name: 'Cultural Experiences', icon: <Globe className="h-4 w-4 mr-2" />, price: 40 },
+    { id: 'shopping', name: 'Shopping Trip', icon: <Tag className="h-4 w-4 mr-2" />, price: 20 },
+  ];
+
+  // Toggle activity selection
+  const toggleActivity = (activityId: string) => {
+    if (selectedActivities.includes(activityId)) {
+      setSelectedActivities(selectedActivities.filter(id => id !== activityId));
+    } else {
+      setSelectedActivities([...selectedActivities, activityId]);
+    }
+  };
+
+  // Calculate estimated cost
+  const calculateEstimatedCost = () => {
+    if (!selectedDestination) return 0;
+    
+    const destination = availableDestinations.find(d => d.id === selectedDestination);
+    if (!destination) return 0;
+    
+    let totalCost = destination.basePricePerDay * customDays * adultsCount;
+    
+    // Children at 70% of adult cost
+    totalCost += destination.basePricePerDay * customDays * childrenCount * 0.7;
+    
+    // Add cost for selected activities
+    selectedActivities.forEach(activityId => {
+      const activity = activities.find(a => a.id === activityId);
+      if (activity) {
+        totalCost += activity.price * (adultsCount + childrenCount);
+      }
+    });
+    
+    // Accommodation multiplier
+    const accommodationMultiplier = 
+      accommodation === 'luxury' ? 1.5 : 
+      accommodation === 'budget' ? 0.7 : 1;
+    
+    return Math.round(totalCost * accommodationMultiplier);
+  };
+
+  // Handle submit
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (selectedDestination) {
+      setShowPlanSummary(true);
+    }
+  };
+
   return (
     <div className="py-16 pt-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,6 +228,355 @@ const Tourism = () => {
           <p className="max-w-3xl mx-auto text-xl text-gray-600">
             Explore our carefully curated inbound and outbound travel packages designed to create unforgettable memories.
           </p>
+        </div>
+
+        {/* Custom Travel Planner */}
+        <div className="mt-24 mb-16">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Create Your Custom Travel Plan</h2>
+            <p className="max-w-3xl mx-auto text-lg text-gray-600">
+              Plan your perfect trip by selecting your destination, duration, and activities
+            </p>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="p-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+              <div className="flex items-center">
+                <Map className="h-8 w-8 mr-3" />
+                <h3 className="text-2xl font-bold">Travel Planner</h3>
+              </div>
+              <p className="mt-2 text-blue-100">Select from our available destinations and customize your journey</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="text-lg font-semibold mb-4 flex items-center">
+                    <Search className="w-5 h-5 mr-2 text-blue-600" />
+                    Select Your Destination
+                  </h4>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    {availableDestinations.map(destination => (
+                      <div 
+                        key={destination.id}
+                        className={`cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${
+                          selectedDestination === destination.id 
+                            ? 'border-blue-600 shadow-md scale-105' 
+                            : 'border-gray-200 hover:border-blue-300'
+                        }`}
+                        onClick={() => setSelectedDestination(destination.id)}
+                      >
+                        <div className="h-24 overflow-hidden">
+                          <img 
+                            src={destination.image} 
+                            alt={destination.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-2 text-center">
+                          <p className="font-medium">{destination.name}</p>
+                          <p className="text-sm text-gray-500">${destination.basePricePerDay}/day</p>
+                        </div>
+                        {selectedDestination === destination.id && (
+                          <div className="absolute top-2 right-2 bg-blue-600 text-white rounded-full p-1">
+                            <Check className="h-4 w-4" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Duration (days)
+                      </label>
+                      <div className="flex items-center">
+                        <input
+                          type="range"
+                          min="3"
+                          max="21"
+                          value={customDays}
+                          onChange={(e) => setCustomDays(parseInt(e.target.value))}
+                          className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
+                        />
+                        <span className="ml-3 text-lg font-semibold text-blue-800 min-w-[40px]">{customDays}</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Adults
+                        </label>
+                        <div className="flex items-center">
+                          <button
+                            type="button"
+                            onClick={() => setAdultsCount(Math.max(1, adultsCount - 1))}
+                            className="bg-gray-200 text-gray-700 py-1 px-3 rounded-l-md"
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            value={adultsCount}
+                            readOnly
+                            className="w-12 text-center border-t border-b border-gray-300 py-1"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setAdultsCount(adultsCount + 1)}
+                            className="bg-gray-200 text-gray-700 py-1 px-3 rounded-r-md"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Children
+                        </label>
+                        <div className="flex items-center">
+                          <button
+                            type="button"
+                            onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))}
+                            className="bg-gray-200 text-gray-700 py-1 px-3 rounded-l-md"
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            value={childrenCount}
+                            readOnly
+                            className="w-12 text-center border-t border-b border-gray-300 py-1"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setChildrenCount(childrenCount + 1)}
+                            className="bg-gray-200 text-gray-700 py-1 px-3 rounded-r-md"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-4">Customize Your Experience</h4>
+                  
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Accommodation Type
+                    </label>
+                    <div className="grid grid-cols-3 gap-3">
+                      <label className={`flex items-center justify-center p-3 border rounded-md cursor-pointer ${accommodation === 'budget' ? 'bg-blue-50 border-blue-500' : 'border-gray-300'}`}>
+                        <input
+                          type="radio"
+                          name="accommodation"
+                          value="budget"
+                          checked={accommodation === 'budget'}
+                          onChange={() => setAccommodation('budget')}
+                          className="sr-only"
+                        />
+                        <span className="text-sm">Budget</span>
+                      </label>
+                      
+                      <label className={`flex items-center justify-center p-3 border rounded-md cursor-pointer ${accommodation === 'hotel' ? 'bg-blue-50 border-blue-500' : 'border-gray-300'}`}>
+                        <input
+                          type="radio"
+                          name="accommodation"
+                          value="hotel"
+                          checked={accommodation === 'hotel'}
+                          onChange={() => setAccommodation('hotel')}
+                          className="sr-only"
+                        />
+                        <span className="text-sm">Standard</span>
+                      </label>
+                      
+                      <label className={`flex items-center justify-center p-3 border rounded-md cursor-pointer ${accommodation === 'luxury' ? 'bg-blue-50 border-blue-500' : 'border-gray-300'}`}>
+                        <input
+                          type="radio"
+                          name="accommodation"
+                          value="luxury"
+                          checked={accommodation === 'luxury'}
+                          onChange={() => setAccommodation('luxury')}
+                          className="sr-only"
+                        />
+                        <span className="text-sm">Luxury</span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Select Activities (Optional)
+                    </label>
+                    <div className="space-y-2">
+                      {activities.map(activity => (
+                        <div key={activity.id} className="flex items-center">
+                          <input
+                            id={`activity-${activity.id}`}
+                            type="checkbox"
+                            checked={selectedActivities.includes(activity.id)}
+                            onChange={() => toggleActivity(activity.id)}
+                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          />
+                          <label htmlFor={`activity-${activity.id}`} className="ml-2 flex items-center text-sm text-gray-700">
+                            {activity.icon}
+                            {activity.name}
+                            <span className="ml-auto text-gray-500">${activity.price}/person</span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Estimated Total:</span>
+                        <span className="text-xl font-bold text-blue-700">${calculateEstimatedCost().toLocaleString()}</span>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">
+                        This is an estimate based on your selections. Final price may vary.
+                      </p>
+                    </div>
+                    
+                    <button
+                      type="submit"
+                      disabled={!selectedDestination}
+                      className={`w-full py-3 rounded-lg text-white font-medium ${
+                        selectedDestination 
+                          ? 'bg-blue-600 hover:bg-blue-700'
+                          : 'bg-gray-300 cursor-not-allowed'
+                      }`}
+                    >
+                      {selectedDestination ? 'Create My Travel Plan' : 'Please Select a Destination'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          {/* Travel Plan Summary */}
+          {showPlanSummary && (
+            <div className="mt-8 bg-white rounded-xl shadow-lg overflow-hidden">
+              <div className="p-6 bg-gradient-to-r from-green-600 to-green-800 text-white">
+                <div className="flex items-center">
+                  <Check className="h-8 w-8 mr-3" />
+                  <h3 className="text-2xl font-bold">Your Travel Plan</h3>
+                </div>
+                <p className="mt-2 text-green-100">Great choice! Here's a summary of your custom travel package</p>
+              </div>
+              
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    {selectedDestination && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-3">Destination</h4>
+                        <div className="flex items-center">
+                          <img 
+                            src={availableDestinations.find(d => d.id === selectedDestination)?.image}
+                            alt={availableDestinations.find(d => d.id === selectedDestination)?.name}
+                            className="w-16 h-16 object-cover rounded-md mr-4"
+                          />
+                          <div>
+                            <p className="text-xl font-bold text-gray-800">
+                              {availableDestinations.find(d => d.id === selectedDestination)?.name}
+                            </p>
+                            <p className="text-gray-600">{customDays} days journey</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold mb-3">Trip Details</h4>
+                      <ul className="space-y-2">
+                        <li className="flex items-center">
+                          <Users className="h-5 w-5 text-blue-600 mr-2" />
+                          <span className="text-gray-700">
+                            {adultsCount} Adult{adultsCount > 1 ? 's' : ''}{childrenCount > 0 ? ` & ${childrenCount} Child${childrenCount > 1 ? 'ren' : ''}` : ''}
+                          </span>
+                        </li>
+                        <li className="flex items-center">
+                          <Calendar className="h-5 w-5 text-blue-600 mr-2" />
+                          <span className="text-gray-700">{customDays} Days</span>
+                        </li>
+                        <li className="flex items-center">
+                          <Shield className="h-5 w-5 text-blue-600 mr-2" />
+                          <span className="text-gray-700">
+                            {accommodation === 'budget' ? 'Budget' : accommodation === 'luxury' ? 'Luxury' : 'Standard'} Accommodation
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    {selectedActivities.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-3">Selected Activities</h4>
+                        <div className="grid grid-cols-2 gap-2">
+                          {selectedActivities.map(activityId => {
+                            const activity = activities.find(a => a.id === activityId);
+                            return activity && (
+                              <div key={activityId} className="flex items-center p-2 bg-blue-50 rounded-md">
+                                {activity.icon}
+                                <span className="text-gray-800">{activity.name}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold mb-3">Price Details</h4>
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <div className="space-y-2">
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Base Package</span>
+                            <span className="text-gray-800">${calculateEstimatedCost().toLocaleString()}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Taxes & Fees</span>
+                            <span className="text-gray-800">${Math.round(calculateEstimatedCost() * 0.1).toLocaleString()}</span>
+                          </div>
+                          <div className="border-t border-gray-200 pt-2 mt-2">
+                            <div className="flex justify-between font-bold">
+                              <span>Total</span>
+                              <span className="text-blue-700">${Math.round(calculateEstimatedCost() * 1.1).toLocaleString()}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-6 flex gap-4">
+                        <button 
+                          onClick={() => setShowPlanSummary(false)}
+                          className="flex-1 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50"
+                        >
+                          Modify Plan
+                        </button>
+                        <button 
+                          className="flex-1 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                        >
+                          Book This Trip
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Outbound Packages */}
