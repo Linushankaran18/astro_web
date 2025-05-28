@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Tourism from './pages/Tourism';
 import StudyInUK from './pages/StudyInUK'
 import Contact from './components/Contact'
-import ChatBot from './components/ChatBot';
+import BlogPost from './pages/BlogPost';
 
 function App() {
   return (
@@ -19,11 +19,11 @@ function App() {
             <Route path="/tourism" element={<Tourism />} />
             <Route path="/study-in-uk" element={<StudyInUK />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             {/* Add other routes as needed */}
           </Routes>
         </main>
       <Footer />
-      <ChatBot />
     </Router>
     </div>
   )

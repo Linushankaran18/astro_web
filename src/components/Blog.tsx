@@ -1,15 +1,18 @@
 import React from 'react'
 import { Calendar, User, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 interface BlogCardProps {
+  id: number;
   image: string;
   title: string;
   date: string;
   author: string;
   excerpt: string;
+  slug: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ image, title, date, author, excerpt }) => {
+const BlogCard: React.FC<Omit<BlogCardProps, 'id'>> = ({ image, title, date, author, excerpt, slug }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
       <img 
@@ -18,7 +21,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ image, title, date, author, excerpt
         className="w-full h-48 object-cover"
       />
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-300">{title}</h3>
+        <Link to={`/blog/${slug}`}>
+          <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-300">{title}</h3>
+        </Link>
         <div className="flex items-center text-gray-500 text-sm mb-4">
           <div className="flex items-center mr-4">
             <Calendar className="h-4 w-4 mr-1" />
@@ -30,13 +35,13 @@ const BlogCard: React.FC<BlogCardProps> = ({ image, title, date, author, excerpt
           </div>
         </div>
         <p className="text-gray-600 mb-4">{excerpt}</p>
-        <a 
-          href="#" 
+        <Link 
+          to={`/blog/${slug}`}
           className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
         >
           Read More
           <ArrowRight className="ml-1 h-4 w-4" />
-        </a>
+        </Link>
       </div>
     </div>
   )
@@ -50,7 +55,8 @@ const Blog = () => {
       title: '2025 Student Visa Updates: What You Need to Know',
       date: 'June 15, 2025',
       author: 'Emma Rodriguez',
-      excerpt: 'Recent changes to student visa regulations and how they might affect your application process and study abroad plans.'
+      excerpt: 'Recent changes to student visa regulations and how they might affect your application process and study abroad plans.',
+      slug: '2025-student-visa-updates'
     },
     {
       id: 2,
@@ -58,7 +64,8 @@ const Blog = () => {
       title: 'Top 10 Destinations for Budget Travelers in 2025',
       date: 'May 28, 2025',
       author: 'Alex Thompson',
-      excerpt: 'Discover affordable yet amazing destinations that won\'t break the bank but will provide unforgettable experiences.'
+      excerpt: 'Discover affordable yet amazing destinations that won\'t break the bank but will provide unforgettable experiences.',
+      slug: 'budget-travel-destinations-2025'
     },
     {
       id: 3,
@@ -66,7 +73,8 @@ const Blog = () => {
       title: 'How to Prepare for Your Visa Interview: Expert Tips',
       date: 'May 10, 2025',
       author: 'Sarah Johnson',
-      excerpt: 'Comprehensive guide to ace your visa interview with confidence and increase your chances of approval.'
+      excerpt: 'Comprehensive guide to ace your visa interview with confidence and increase your chances of approval.',
+      slug: 'visa-interview-expert-tips'
     }
   ]
 
@@ -89,18 +97,19 @@ const Blog = () => {
               date={post.date}
               author={post.author}
               excerpt={post.excerpt}
+              slug={post.slug}
             />
           ))}
         </div>
         
         <div className="text-center mt-10">
-          <a 
-            href="#" 
+          <Link 
+            to="/blog"
             className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300"
           >
             View All Articles
             <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
