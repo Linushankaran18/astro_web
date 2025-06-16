@@ -1,5 +1,5 @@
 import React from 'react'
-import { Calendar, User, ArrowRight } from 'lucide-react'
+import { Calendar, User, ArrowRight, Table2Icon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 interface BlogCardProps {
@@ -82,7 +82,11 @@ const Blog = () => {
     <section id="blog" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Latest Travel Insights</h2>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 mb-4">
+            <Table2Icon className="h-5 w-5 text-blue-700 mr-2" />
+            <span className="text-blue-700 font-medium">Blogs</span>
+          </div>
+          <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">Latest <span className="text-blue-600">Travel</span>  Insights</h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
             Stay updated with the latest travel news, visa regulations, and destination guides
           </p>

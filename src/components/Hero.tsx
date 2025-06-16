@@ -137,7 +137,7 @@ const Hero = () => {
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg opacity-20 blur-xl animate-glow"></div>
                 
                 {/* Slideshow container */}
-                <div className="relative h-[320px]">
+                <div className="relative h-[480px]">
                   {/* Slides */}
                   {adSlides.map((slide, index) => (
                     <div 
@@ -146,7 +146,7 @@ const Hero = () => {
                         index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
                       }`}
                     >
-                      <div className="h-[200px] w-[300px] mx-auto overflow-hidden rounded-md mb-3">
+                      <div className="h-[350px] w-[300px] mx-auto overflow-hidden rounded-md mb-3">
                         <img 
                           src={slide.image} 
                           alt={slide.title} 
@@ -184,7 +184,7 @@ const Hero = () => {
                   </button>
                   
                   {/* Slide indicators */}
-                  <div className="absolute bottom-[110px] left-0 right-0 flex justify-center z-20 space-x-2">
+                  <div className="absolute bottom-[140px] left-0 right-0 flex justify-center z-20 space-x-2">
                     {adSlides.map((_, index) => (
                       <button 
                         key={index}

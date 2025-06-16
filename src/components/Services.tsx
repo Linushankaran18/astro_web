@@ -67,6 +67,10 @@ const Services = () => {
     <section id="services" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 mb-4">
+            <Plane className="h-5 w-5 text-blue-700 mr-2" />
+            <span className="text-blue-700 font-medium">What we Offer</span>
+          </div>
           <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">Our <span className="text-blue-600"> Services </span> </h2>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
             We provide comprehensive travel and visa solutions tailored to your specific needs
