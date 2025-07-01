@@ -1,13 +1,5 @@
 import React from 'react'
 
-// Custom SVG icons
-const GlobeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 text-blue-400">
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="2" y1="12" x2="22" y2="12"></line>
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-  </svg>
-);
 
 const FacebookIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
@@ -72,8 +64,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <GlobeIcon />
-              <span className="ml-2 text-xl font-bold text-white">GlobalVisa</span>
+              <img src="images/Astro_logo.png" alt="Astro Logo" className="h-10 w-10 rounded-full" />
+              <span className="ml-2 text-xl font-bold text-white">Astro Trend</span>
             </div>
             <p className="text-gray-400 mb-4">
               Your trusted partner for visa consultation, air ticketing, and tourism services worldwide.
