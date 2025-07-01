@@ -38,7 +38,7 @@ const Services = () => {
       icon: <GraduationCap className="h-6 w-6 text-blue-600" />,
       title: 'Student Visas',
       description: 'Comprehensive guidance for students seeking education abroad. We handle documentation, university applications, and visa processing.',
-      link: '#student-visa'
+      link: '#countries'
     },
     {
       id: 'visitor-visa',

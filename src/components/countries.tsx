@@ -91,16 +91,43 @@ const VisaDestinations = () => {
                   </ul>
                 </div>
                 <div className="mt-4 pt-4 border-t border-gray-100">
-                  {
+                  {country.name === "Canada" ? (
                     <Link 
-                    to="/study-in-uk" 
-                    className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
-                    Apply for {country.name} visa
-                    <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </Link>
-                  }
+                      to="/study-in-canada" 
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                      Apply for {country.name} visa
+                      <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  ) : country.name === "United Kingdom" ? (
+                    <Link 
+                      to="/study-in-uk" 
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                      Apply for {country.name} visa
+                      <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  ) : country.name === "Germany" ? (
+                    <Link 
+                      to="/study-in-Germany" 
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                      Apply for {country.name} visa
+                      <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  ) : (
+                    <Link 
+                      to="#contact" 
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+                      Apply for {country.name} visa
+                      <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
