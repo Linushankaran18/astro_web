@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react'
 
   const Testimonials = () => {
     const testimonials = [
@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
         name: 'Rukshaman Rathinarsa',
         role: 'Student at University of Dundee',
         image: '/images/ruku.jpg',
-        quote: 'Astro Trend made my dream of studying abroad a reality. Their guidance throughout the student visa process was invaluable. I highly recommend their services to anyone looking to study overseas.',
+        quote: 'Astro Trend made my dream of studying abroad a reality. Their guidance throughout the student visa process was invaluable.\nI highly recommend their services to anyone looking to study overseas.',
         rating: 5
       },
     {
@@ -16,7 +16,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
       name: 'Arun Kalastan Saviri',
       role: 'Student at Algoma University',
       image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
+      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and \nflight bookings has saved me countless hours.',
       rating: 5
     },
     {
@@ -24,7 +24,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
       name: 'Priya Patel',
       role: 'Family Vacation',
       image: '/images/sainuja photo.jpg',
-      quote: 'Our family trip to Europe was perfectly planned by GlobalVisa. From visa applications to tour arrangements, everything was handled professionally. We had the vacation of a lifetime!',
+      quote: 'Our family trip to Europe was perfectly planned by GlobalVisa. From visa applications to tour arrangements, everything was \nhandled professionally. We had the vacation of a lifetime!',
       rating: 4
     },
     {
@@ -32,7 +32,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
       name: 'Palany Jeevan',
       role: 'Student at University of Chester',
       image: '/images/jeevan.jpeg',
-      quote: 'The team at GlobalVisa went above and beyond to help me with my complicated visa situation. Their expertise and dedication are unmatched in the industry.',
+      quote: 'The team at GlobalVisa went above and beyond to help me with my complicated visa situation. Their expertise and dedication \nare unmatched in the industry.',
       rating: 5
     },
     {
@@ -119,6 +119,27 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
             Hear from people who have successfully achieved their travel and education goals with our help
           </p>
+          
+          {/* Google Reviews Link */}
+          <div className="mt-6">
+            <a 
+              href="https://g.page/r/CWxEDgwT1eMPEAE/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 hover:shadow-md transition-all duration-200"
+            >
+              <div className="flex items-center mr-3">
+                <span className="text-blue-600 font-semibold mr-1">Google</span>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+              </div>
+              View Our Google Reviews
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </a>
+          </div>
         </div>
         
         <div className="relative">
@@ -150,7 +171,7 @@ import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
                             />
                           ))}
                         </div>
-                        <p className="text-gray-600 italic mb-4 line-clamp-2">"{testimonial.quote}"</p>
+                        <p className="text-gray-600 italic mb-4 whitespace-pre-line">"{testimonial.quote}"</p>
                         <div className="font-medium">
                           <p className="text-blue-600">{testimonial.name}</p>
                           <p className="text-gray-500">{testimonial.role}</p>
