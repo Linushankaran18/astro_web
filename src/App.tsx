@@ -8,6 +8,8 @@ import StudyInUK from './pages/StudyInUK'
 import Contact from './components/Contact'
 import BlogPost from './pages/BlogPost';
 import BlogsPage from './pages/BlogsPage';
+import StudyInCanada from './pages/StudyInCanada';
+import StudyInGermany from './pages/StudyInGermany';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/tourism" element={<Tourism />} />
             <Route path="/study-in-uk" element={<StudyInUK />} />
+            <Route path="/study-in-canada" element={<StudyInCanada />} />
+            <Route path="/study-in-Germany" element={<StudyInGermany />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
