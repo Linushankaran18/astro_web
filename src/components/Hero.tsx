@@ -64,8 +64,8 @@ const Hero = () => {
   };
   
   return (
-    <div id="home" className="relative bg-gradient-to-r from-blue-900 to-indigo-800 pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-      <div className="pt-24 md:pt-28"> {/* Add appropriate padding-top */}
+    <div id="home" className="relative bg-gradient-to-r from-blue-900 to-indigo-800 pt-16 pb-16 md:pt-20 md:pb-24 overflow-hidden">
+      <div className="pt-16 md:pt-20"> {/* Reduced padding-top from pt-24/pt-28 to pt-16/pt-20 */}
         {/* Layered background for depth */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Base layer image */}
@@ -107,7 +107,7 @@ const Hero = () => {
               {/* Content remains the same, just enhance the badge */}
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/30 backdrop-blur-md border border-blue-400/50 mb-6 shadow-lg">
                 <Award className="h-5 w-5 text-yellow-300 mr-2 animate-pulse-slow" />
-                <span className="text-blue-100 font-medium text-sm">Trusted by 1000+ Students</span>
+                <span className="text-blue-100 font-medium text-sm">Trusted by 100+ Students</span>
               </div>
               
               {/* Add text shadow for better readability */}
