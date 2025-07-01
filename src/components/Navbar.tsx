@@ -80,7 +80,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img src='/images/astro_log.png' alt="Astro Consultancy Logo" className="h-16 w-16 text-blue-600" />
+              <img src='/images/astro_log.png' alt="Astro Consultancy Logo" className="h-22 w-24 text-blue-600" />
               <span className="ml-2 text-2xl font-bold text-blue-700">Astro Consultancy</span>
             </Link>
           </div>
