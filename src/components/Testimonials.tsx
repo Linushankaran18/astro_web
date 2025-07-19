@@ -45,10 +45,10 @@ import { ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react'
     },
     {
       id: 6,
-      name: 'Arun Kalastan Saviri',
-      role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
+      name: 'Mathivathany Baskaran',
+      role: 'Graduation Visa Applicant',
+      image: '/images/mathi.jpeg',
+      quote: 'Astro Trend made my graduation visa process seamless. Their team was always available to answer my questions and guide me through each step.',
       rating: 5
     },
     {
