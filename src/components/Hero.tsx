@@ -9,24 +9,18 @@ const Hero = () => {
   const adSlides = [
     {
       id: 1,
-      image: "/images/ads/ad4.png",
-      title: "Chithampara Maths Challenge",
-      description: "Sucessfully did visa processing and air ticket booking for students"
-    },
-    {
-      id: 2,
       image: "/images/ads/ad1.jpeg", // Replace with actual ad image paths
       title: "What Next? After A/Level",
       description: "Get your student visa with us"
     },
     {
-      id: 3,
+      id: 2,
       image: "/images/ads/ad2.jpg",
       title: "Master Program",
       description: "Get your student visa with us"
     },
     {
-      id: 4,
+      id: 3,
       image: "/images/ads/ad3.jpg",
       title: "Study In UK",
       description: "Get your student visa with us"
@@ -70,8 +64,8 @@ const Hero = () => {
   };
   
   return (
-    <div id="home" className="relative bg-gradient-to-r from-blue-900 to-indigo-800 pt-16 pb-16 md:pt-20 md:pb-24 overflow-hidden">
-      <div className="pt-16 md:pt-20"> {/* Reduced padding-top from pt-24/pt-28 to pt-16/pt-20 */}
+    <div id="home" className="relative bg-gradient-to-r from-blue-900 to-indigo-800 pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+      <div className="pt-24 md:pt-28"> {/* Add appropriate padding-top */}
         {/* Layered background for depth */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Base layer image */}
