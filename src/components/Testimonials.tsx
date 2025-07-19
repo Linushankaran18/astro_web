@@ -7,89 +7,81 @@ import { ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react'
         id: 1,
         name: 'Rukshaman Rathinarsa',
         role: 'Student at University of Dundee',
-        image: '/images/ruku.jpg',
+        image: '/images/testimonials/ruku.jpg',
         quote: 'Astro Trend made my dream of studying abroad a reality. Their guidance throughout the student visa process was invaluable.\nI highly recommend their services to anyone looking to study overseas.',
-        rating: 5
+        rating: 5,
+        country: 'UK',
+        countryFlag: '/images/flags/flaguk.png'
       },
     {
       id: 2,
       name: 'Arun Kalastan Saviri',
       role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
+      image: '/images/testimonials/arun.jpg',
       quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and \nflight bookings has saved me countless hours.',
-      rating: 5
+      rating: 5,
+      country: 'Canada',
+      countryFlag: '/images/flags/flagcan.png'
     },
     {
       id: 3,
       name: 'Priya Patel',
       role: 'Family Vacation',
-      image: '/images/sainuja photo.jpg',
+      image: '/images/testimonials/sainuja photo.jpg',
       quote: 'Our family trip to Europe was perfectly planned by GlobalVisa. From visa applications to tour arrangements, everything was \nhandled professionally. We had the vacation of a lifetime!',
-      rating: 4
+      rating: 4,
+      country: 'Europe',
+      countryFlag: '/images/flags/flagfra.png'
     },
     {
       id: 4,
       name: 'Palany Jeevan',
       role: 'Student at University of Chester',
-      image: '/images/jeevan.jpeg',
+      image: '/images/testimonials/jeevan.jpeg',
       quote: 'The team at GlobalVisa went above and beyond to help me with my complicated visa situation. Their expertise and dedication \nare unmatched in the industry.',
-      rating: 5
+      rating: 5,
+      country: 'UK',
+      countryFlag: '/images/flags/flaguk.png'
     },
     {
       id: 5,
-      name: 'Subarmaniyam Prabukumar',
-      role: 'Student at University Dundee',
-      image: '/images/sainuja.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
-      rating: 5
+      name: 'Lowe Suoun Sandeepa',
+      role: 'Student at Swansea University',
+      image: '/images/testimonials/supun.png',
+      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling \nvisa applications and flight bookings has saved me countless hours.',
+      rating: 5,
+      country: 'UK',
+      countryFlag: '/images/flags/flaguk.png'
     },
     {
       id: 6,
       name: 'Mathivathany Baskaran',
       role: 'Graduation Visa Applicant',
-      image: '/images/mathi.jpeg',
-      quote: 'Astro Trend made my graduation visa process seamless. Their team was always available to answer my questions and guide me through each step.',
-      rating: 5
+      image: '/images/testimonials/mathi.jpeg',
+      quote: 'Astro Trend made my graduation visa process seamless. \nTheir team was always available to answer my questions and guide me through each step.',
+      rating: 4,
+      country: 'UK',
+      countryFlag: '/images/flags/flaguk.png'
     },
     {
       id: 7,
-      name: 'Arun Kalastan Saviri',
-      role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
-      rating: 5
+      name: 'Lowe Malith Sudarsha',
+      role: 'Student at University of South Wales',
+      image: '/images/testimonials/malith.png',
+      quote: 'I\'ve got my student visa for the course MSc in Mechanical Engineering in UK through the services of Astro Trend. \nTheir team was very supportive and guided me through the entire process.',
+      rating: 5,
+      country: 'UK',
+      countryFlag: '/images/flags/flaguk.png'
     },
     {
       id: 8,
-      name: 'Arun Kalastan Saviri',
-      role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
-      rating: 5
-    },
-    {
-      id: 9,
-      name: 'Arun Kalastan Saviri',
-      role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
-      rating: 5
-    },
-    {
-      id: 10,
-      name: 'Arun Kalastan Saviri',
-      role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
-      rating: 5
-    },
-    {
-      id: 11,
-      name: 'Arun Kalastan Saviri',
-      role: 'Student at Algoma University',
-      image: '/images/arun.jpg',
-      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. Their efficiency in handling visa applications and flight bookings has saved me countless hours.',
-      rating: 5
+      name: 'Kajanan Sivarajah',
+      role: 'Student at Humber College',
+      image: '/images/testimonials/kajan.png',
+      quote: 'I\'ve been using Astro Trend for my student visa needs for over last 3 months. \nTheir efficiency in handling visa applications and flight bookings has saved me countless hours.',
+      rating: 5,
+      country: 'Canada',
+      countryFlag: '/images/flags/flagcan.png'
     }
   ]
 
@@ -156,11 +148,25 @@ import { ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react'
                   <div className="bg-white rounded-xl shadow-md overflow-hidden p-8">
                     <div className="md:flex">
                       <div className="md:flex-shrink-0 flex justify-center">
-                        <img 
-                          className="h-32 w-32 rounded-full object-cover border-4 border-blue-100" 
-                          src={testimonial.image} 
-                          alt={testimonial.name} 
-                        />
+                        <div className="relative">
+                          <img 
+                            className="h-32 w-32 rounded-full object-cover border-4 border-blue-100" 
+                            src={testimonial.image} 
+                            alt={testimonial.name} 
+                          />
+                          {/* Country Flag Badge */}
+                          <div className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full border-2 border-white shadow-lg overflow-hidden">
+                            <img 
+                              src={testimonial.countryFlag} 
+                              alt={testimonial.country}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                       <div className="mt-6 md:mt-0 md:ml-6 text-center md:text-left">
                         <div className="flex items-center justify-center md:justify-start mb-2">
@@ -173,7 +179,12 @@ import { ChevronLeft, ChevronRight, Star, ExternalLink } from 'lucide-react'
                         </div>
                         <p className="text-gray-600 italic mb-4 whitespace-pre-line">"{testimonial.quote}"</p>
                         <div className="font-medium">
-                          <p className="text-blue-600">{testimonial.name}</p>
+                          <div className="flex items-center justify-center md:justify-start">
+                            <p className="text-blue-600">{testimonial.name}</p>
+                            <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                              {testimonial.country}
+                            </span>
+                          </div>
                           <p className="text-gray-500">{testimonial.role}</p>
                         </div>
                       </div>

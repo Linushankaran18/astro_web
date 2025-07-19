@@ -9,18 +9,24 @@ const Hero = () => {
   const adSlides = [
     {
       id: 1,
+      image: "/images/ads/ad4.png",
+      title: "Chithampara Maths Challenge",
+      description: "Sucessfully did visa processing and air ticket booking for students"
+    },
+    {
+      id: 2,
       image: "/images/ads/ad1.jpeg", // Replace with actual ad image paths
       title: "What Next? After A/Level",
       description: "Get your student visa with us"
     },
     {
-      id: 2,
+      id: 3,
       image: "/images/ads/ad2.jpg",
       title: "Master Program",
       description: "Get your student visa with us"
     },
     {
-      id: 3,
+      id: 4,
       image: "/images/ads/ad3.jpg",
       title: "Study In UK",
       description: "Get your student visa with us"
