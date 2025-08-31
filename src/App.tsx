@@ -10,6 +10,8 @@ import BlogPost from './pages/BlogPost';
 import BlogsPage from './pages/BlogsPage';
 import StudyInCanada from './pages/StudyInCanada';
 import StudyInGermany from './pages/StudyInGermany';
+import About from './components/About';
+import AirTicketing from './pages/AirTicketing';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/air-ticketing" element={<AirTicketing />} />
             {/* Add other routes as needed */}
           </Routes>
         </main>

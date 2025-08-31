@@ -52,7 +52,7 @@ const Services = () => {
       icon: <Ticket className="h-6 w-6 text-blue-600" />,
       title: 'Air Ticketing',
       description: 'Best deals on international and domestic flights with flexible booking options and 24/7 support.',
-      link: '#air-ticketing'
+      link: '/air-ticketing'
     },
     {
       id: 'tourism',
