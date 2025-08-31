@@ -4,22 +4,23 @@ import { Link } from 'react-router-dom';
 
 // Export the blog data so it can be imported by BlogPost
 export const allBlogPosts = [
-  {
+   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    title: '2025 Student Visa Updates: What You Need to Know',
-    date: 'June 15, 2025',
-    author: 'Emma Rodriguez',
-    excerpt: 'Recent changes to student visa regulations and how they might affect your application process and study abroad plans.',
-    slug: '2025-student-visa-updates',
-    category: 'Visa Information'
+    title: "From Dream to Reality: A Student's Journey to Germany",
+    excerpt: "Journey from initial consultation to successfully studying at a German university.",
+    image: "/images/stories/cover.png",
+    date: "December 15, 2024",
+    author: "Astro Trend Team",
+    category: "Success Stories",
+    slug: "student-success-journey",
+    type: "story" // Add type field to distinguish story posts
   },
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
     title: 'Top 10 Destinations for Budget Travelers in 2025',
     date: 'May 28, 2025',
-    author: 'Alex Thompson',
+    author: "Astro Trend Team",
     excerpt: 'Discover affordable yet amazing destinations that won\'t break the bank but will provide unforgettable experiences.',
     slug: 'budget-travel-destinations-2025',
     category: 'Travel Tips'
@@ -29,7 +30,7 @@ export const allBlogPosts = [
     image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
     title: 'How to Prepare for Your Visa Interview: Expert Tips',
     date: 'May 10, 2025',
-    author: 'Sarah Johnson',
+    author: "Astro Trend Team",
     excerpt: 'Comprehensive guide to ace your visa interview with confidence and increase your chances of approval.',
     slug: 'visa-interview-expert-tips',
     category: 'Visa Information'
@@ -37,9 +38,7 @@ export const allBlogPosts = [
   {
     id: 4,
     image: 'https://images.unsplash.com/photo-1498429089284-41f8cf3ffd39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    title: 'New UK Student Visa Requirements for 2025',
-    date: 'April 22, 2025',
-    author: 'James Wilson',
+    titauthor: "Astro Trend Team",
     excerpt: 'Learn about the latest changes to UK student visa requirements and how to prepare your application.',
     slug: 'uk-student-visa-requirements-2025',
     category: 'Visa Information'
@@ -49,7 +48,7 @@ export const allBlogPosts = [
     image: 'https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     title: 'How to Finance Your Study Abroad Journey',
     date: 'April 15, 2025',
-    author: 'Michael Chen',
+    author: "Astro Trend Team",
     excerpt: 'Explore scholarships, loans, and creative funding strategies to make your international education dreams come true.',
     slug: 'financing-study-abroad',
     category: 'Education'
@@ -59,11 +58,22 @@ export const allBlogPosts = [
     image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     title: 'Top Universities for International Students in 2025',
     date: 'March 30, 2025',
-    author: 'Lisa Patel',
+    author: "Astro Trend Team",
     excerpt: 'Discover which universities around the world offer the best experience for international students.',
     slug: 'top-universities-international-students-2025',
     category: 'Education'
-  }
+  },
+  // Add story-type posts
+  {
+    id: 7,
+    image: '/images/blog/studentvisa.jpg',
+    title: '2025 Student Visa Updates: What You Need to Know',
+    date: 'June 15, 2025',
+    author: "Astro Trend Team",
+    excerpt: 'Recent changes to student visa regulations and how they might affect your application process and study abroad plans.',
+    slug: '2025-student-visa-updates',
+    category: 'Visa Information'
+  },
 ];
 
 // Get all unique categories
@@ -75,8 +85,8 @@ const BlogsPage = () => {
   
   // Filter posts based on search and category
   const filteredPosts = allBlogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false) || 
+                          (post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });

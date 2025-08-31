@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, Calendar, User, Clock } from 'lucide-react';
 import { Link, useParams, Navigate } from 'react-router-dom';
+import StoryBlogTemplate from './StoryBlogTemplate';
 
 // Import the same blog posts data
 // In a real application, you would likely fetch this from an API
@@ -10,6 +11,9 @@ import { allBlogPosts } from './BlogsPage';
 const blogPostsMap = Object.fromEntries(
   allBlogPosts.map(post => [post.slug, post])
 );
+
+// Define which posts are story-type posts
+const storyPostSlugs = ['student-success-journey']; // Add more story post slugs here
 
 // Content for the blog post with ID 1
 const blogContent = {
@@ -65,7 +69,7 @@ const blogContent = {
     
     <p class="mb-4">Contact us for a consultation to learn more about how these visa updates might affect your study abroad plans for 2025 and beyond.</p>
   `,
-  // Add content for other blog posts as needed
+  // Add content for other blog post
 };
 
 const BlogPost = () => {
@@ -74,6 +78,11 @@ const BlogPost = () => {
   // If slug doesn't exist in our data, redirect to blogs page
   if (!slug || !blogPostsMap[slug]) {
     return <Navigate to="/blogs" replace />;
+  }
+  
+  // Check if this is a story-type post
+  if (storyPostSlugs.includes(slug)) {
+    return <StoryBlogTemplate />;
   }
   
   const post = blogPostsMap[slug];

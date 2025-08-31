@@ -50,20 +50,21 @@ const BlogCard: React.FC<Omit<BlogCardProps, 'id'>> = ({ image, title, date, aut
 const Blog = () => {
   const blogPosts = [
     {
-      id: 1,
-      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      title: '2025 Student Visa Updates: What You Need to Know',
-      date: 'June 15, 2025',
-      author: 'Emma Rodriguez',
-      excerpt: 'Recent changes to student visa regulations and how they might affect your application process and study abroad plans.',
-      slug: '2025-student-visa-updates'
-    },
+    id: 1,
+    title: "From Dream to Reality: A Student's Journey to Germany",
+    excerpt: "Journey from initial consultation to successfully studying at a German university.",
+    image: "/images/stories/cover.png",
+    date: "December 15, 2024",
+    author: "Astro Trend Team",
+    slug: "student-success-journey",
+    
+  },
     {
       id: 2,
       image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       title: 'Top 10 Destinations for Budget Travelers in 2025',
       date: 'May 28, 2025',
-      author: 'Alex Thompson',
+      author: "Astro Trend Team",
       excerpt: 'Discover affordable yet amazing destinations that won\'t break the bank but will provide unforgettable experiences.',
       slug: 'budget-travel-destinations-2025'
     },
@@ -72,7 +73,7 @@ const Blog = () => {
       image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       title: 'How to Prepare for Your Visa Interview: Expert Tips',
       date: 'May 10, 2025',
-      author: 'Sarah Johnson',
+      author: "Astro Trend Team",
       excerpt: 'Comprehensive guide to ace your visa interview with confidence and increase your chances of approval.',
       slug: 'visa-interview-expert-tips'
     }
